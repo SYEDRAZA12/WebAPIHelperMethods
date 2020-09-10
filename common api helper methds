@@ -1,0 +1,187 @@
+clickOnElement(String locator)
+typeOnElement(String locator, String value)
+typeOnElementNEnter(String locator, String value)
+typeOnElementNEnter(String locator, String value, WebDriver driver1)
+clearField(String locator)
+navigateBack()
+clickOnElement(String locator, WebDriver driver1)
+typeOnInputField(String locator, String value)
+clickByXpath(String locator)
+typeByCss(String locator, String value)
+typeByCssNEnter(String locator, String value)
+typeByXpath(String locator, String value)
+takeEnterKeys(String locator)
+clearInputField(String locator)
+
+getTextFromWebElements(String locator)
+getTextFromWebElements(String locator, WebDriver driver1)
+
+getListOfWebElementsById(String locator)
+getListOfWebElementsByCss(String locator)
+getListOfWebElementsByCss(String locator, WebDriver driver1)
+getListOfWebElementsByXpath(String locator)
+
+getCurrentPageUrl()
+navigateForward()
+
+getTextByCss(String locator)
+getTextByXpath(String locator)
+getTextById(String locator)
+getTextByName(String locator)
+
+getTitle() by WebElement
+
+getListOfString(List<WebElement> list)
+selectOptionByVisibleText(WebElement element, String value)
+sleepFor(int sec)
+mouseHoverByCSS(String locator)
+mouseHoverByXpath(String locator)
+okAlert()
+cancelAlert()
+iframeHandle(WebElement element)
+goBackToHomeWindow()
+getLinks(String locator)
+takeScreenShot()
+waitUntilClickAble(By locator)
+waitUntilVisible(By locator)
+waitUntilSelectable(By locator)
+upLoadFile(String locator, String path)
+clearInput(String locator)
+keysInput(String locator)
+handleNewTab(WebDriver driver1)
+isPopUpWindowDisplayed(WebDriver driver1, String locator)
+typeOnInputBox(String locator, String value)
+brokenLink()
+inputValueInTextBoxByWebElement(WebElement webElement, String value)
+clearInputBox(WebElement webElement)
+getTextByWebElement(WebElement webElement)
+
+
+windowSwitch()
+scrollUpDownByHeight()
+
+
+
+
+
+
+
+
+
+public void clearInputBox(WebElement webElement) {
+        webElement.clear();
+    }
+
+   
+
+
+    public void clearField(String locator) {
+        driver.findElement(By.id(locator)).clear();
+    }
+
+
+    public void clearInputField(String locator) {
+        driver.findElement(By.cssSelector(locator)).clear();
+    }
+
+
+public void mouseHoverByCSS(String locator) {
+        try {
+            WebElement element = driver.findElement(By.cssSelector(locator));
+            Actions action = new Actions(driver);
+            Actions hover = action.moveToElement(element);
+        } catch (Exception ex) {
+            System.out.println("First attempt has been done, This is second try");
+            WebElement element = driver.findElement(By.cssSelector(locator));
+            Actions action = new Actions(driver);
+            action.moveToElement(element).perform();
+        }
+    }
+
+
+    public void mouseHoverByXpath(String locator) {
+//        try {
+//            WebElement element = driver.findElement(By.xpath(locator));
+//            Actions action = new Actions(driver);
+//            Actions hover = action.moveToElement(element);
+//        } catch (Exception ex) {
+//            System.out.println("First attempt has been done, This is second try");
+//            WebElement element = driver.findElement(By.xpath(locator));
+//            Actions action = new Actions(driver);
+//            action.moveToElement(element).perform();
+//        }
+//    }
+
+
+public static void mouseHover(WebElement element) {
+            Actions actions = new Actions(driver);
+            actions.moveToElement(element).perform();
+        }
+
+
+
+public void typeOnElement(String locator, String value) {
+        try {
+            driver.findElement(By.cssSelector(locator)).sendKeys(value);
+        } catch (Exception ex) {
+            driver.findElement(By.xpath(locator)).sendKeys(value);
+        }
+    }
+
+    public static void typeOnElementNEnter(String locator, String value) {
+        try {
+            driver.findElement(By.cssSelector(locator)).sendKeys(value, Keys.ENTER);
+        } catch (Exception ex1) {
+            try {
+                System.out.println("First Attempt was not successful");
+                driver.findElement(By.name(locator)).sendKeys(value, Keys.ENTER);
+            } catch (Exception ex2) {
+                try {
+                    System.out.println("Second Attempt was not successful");
+                    driver.findElement(By.xpath(locator)).sendKeys(value, Keys.ENTER);
+                } catch (Exception ex3) {
+                    System.out.println("Third Attempt was not successful");
+                    driver.findElement(By.id(locator)).sendKeys(value, Keys.ENTER);
+                }
+            }
+        }
+    }
+
+    public static void typeOnElementNEnter(String locator, String value, WebDriver driver1) {
+        try {
+            driver1.findElement(By.cssSelector(locator)).sendKeys(value, Keys.ENTER);
+        } catch (Exception ex1) {
+            try {
+                System.out.println("First Attempt was not successful");
+                driver1.findElement(By.id(locator)).sendKeys(value, Keys.ENTER);
+            } catch (Exception ex2) {
+                try {
+                    System.out.println("Second Attempt was not successful");
+                    driver1.findElement(By.name(locator)).sendKeys(value, Keys.ENTER);
+                } catch (Exception ex3) {
+                    System.out.println("Third Attempt was not successful");
+                    driver1.findElement(By.xpath(locator)).sendKeys(value, Keys.ENTER);
+                }
+            }
+        }
+    }
+
+
+
+    public static void windowSwitch() {
+        for (String winHandle : driver.getWindowHandles()) {
+            driver.switchTo().window(winHandle);
+        }
+    }
+
+
+    public static WebDriver handleNewTab(WebDriver driver1) {
+        String oldTab = driver1.getWindowHandle();
+        List<String> newTabs = new ArrayList<String>(driver1.getWindowHandles());
+        newTabs.remove(oldTab);
+        driver1.switchTo().window(newTabs.get(0));
+        return driver1;
+    }
+
+
+
