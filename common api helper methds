@@ -1,41 +1,102 @@
+Expalaination:  There are three basic reason we need to upgrade our WebAPI as detail under.
+
+1) We have so many lines of code in this class which could decreased by using only WebElements instead of Locators.  
+
+2)  For same action/job  we have more then one methods since its taking Locators instead of WebElements and due to Try-Catch block statemests it takes more execution time as well.
+
+3)  Most of the Method title doesnt mention which locator taking either we have to memorise the method title or we have go Web API to find out which locator it is taking.
+
+4)  we can achive desired function by less code 
+
+
+
+
+Example 1 Expalnation 1
+Example 1 Expalnation 2
+Example 1 Expalnation 3
+
+
 clickOnElement(String locator)
-typeOnElement(String locator, String value)
-typeOnElementNEnter(String locator, String value)
-typeOnElementNEnter(String locator, String value, WebDriver driver1)
-clearField(String locator)
-navigateBack()
 clickOnElement(String locator, WebDriver driver1)
-typeOnInputField(String locator, String value)
 clickByXpath(String locator)
+
+
+
+Example 2 Expalnation 1
+Example 2 Expalnation 2
+
+
+typeOnElement(String locator, String value)
 typeByCss(String locator, String value)
 typeByCssNEnter(String locator, String value)
 typeByXpath(String locator, String value)
-takeEnterKeys(String locator)
+typeOnInputBox(String locator, String value)
+typeOnInputField(String locator, String value)
+inputValueInTextBoxByWebElement(WebElement webElement, String value)
+typeOnElementNEnter(String locator, String value)
+typeOnElementNEnter(String locator, String value, WebDriver driver1)
+
+
+
+
+Example 3 Expalnation 1
+Example 3 Expalnation 2
+Example 2 Expalnation 3
+
 clearInputField(String locator)
+clearInput(String locator)
+clearInputBox(WebElement webElement)
+
+
+Example 4 Expalnation 1
+Example 4 Expalnation 2
 
 getTextFromWebElements(String locator)
 getTextFromWebElements(String locator, WebDriver driver1)
+getTextByCss(String locator)
+getTextByXpath(String locator)
+getTextById(String locator)
+getTextByName(String locator)
+getTextByWebElement(WebElement webElement)
+
+
+Example 5 Expalnation 1
 
 getListOfWebElementsById(String locator)
 getListOfWebElementsByCss(String locator)
 getListOfWebElementsByCss(String locator, WebDriver driver1)
 getListOfWebElementsByXpath(String locator)
-
-getCurrentPageUrl()
-navigateForward()
-
-getTextByCss(String locator)
-getTextByXpath(String locator)
-getTextById(String locator)
-getTextByName(String locator)
-
-getTitle() by WebElement
-
 getListOfString(List<WebElement> list)
-selectOptionByVisibleText(WebElement element, String value)
-sleepFor(int sec)
+
+
+
+Example 6 Expalanation 1
+Example 1 Expalanation 4
+
 mouseHoverByCSS(String locator)
 mouseHoverByXpath(String locator)
+
+
+
+
+
+
+Example 5 Expalnation 2
+
+takeEnterKeys(String locator)
+keysInput(String locator)
+
+
+Example 2  Explanation 4
+
+windowSwitch()
+handleNewTab(WebDriver driver1)
+
+
+
+
+selectOptionByVisibleText(WebElement element, String value)
+sleepFor(int sec)
 okAlert()
 cancelAlert()
 iframeHandle(WebElement element)
@@ -46,44 +107,27 @@ waitUntilClickAble(By locator)
 waitUntilVisible(By locator)
 waitUntilSelectable(By locator)
 upLoadFile(String locator, String path)
-clearInput(String locator)
-keysInput(String locator)
-handleNewTab(WebDriver driver1)
+getCurrentPageUrl()
+navigateForward()
+getTitle() by WebElement
 isPopUpWindowDisplayed(WebDriver driver1, String locator)
-typeOnInputBox(String locator, String value)
+navigateBack()
 brokenLink()
-inputValueInTextBoxByWebElement(WebElement webElement, String value)
-clearInputBox(WebElement webElement)
-getTextByWebElement(WebElement webElement)
-
-
-windowSwitch()
 scrollUpDownByHeight()
 
 
 
+<**********************************************   Below Data is Code  Examples the implementation     ***********************************************>
 
 
+Mouse Hover with Web Elements 
 
+public static void mouseHover(WebElement element) {  
+ Actions actions = new Actions(driver);
+  actions.moveToElement(element).perform();         
+ } 
 
-
-
-public void clearInputBox(WebElement webElement) {
-        webElement.clear();
-    }
-
-   
-
-
-    public void clearField(String locator) {
-        driver.findElement(By.id(locator)).clear();
-    }
-
-
-    public void clearInputField(String locator) {
-        driver.findElement(By.cssSelector(locator)).clear();
-    }
-
+These are in our Web API which are not enough for all locators 
 
 public void mouseHoverByCSS(String locator) {
         try {
@@ -98,27 +142,37 @@ public void mouseHoverByCSS(String locator) {
         }
     }
 
-
     public void mouseHoverByXpath(String locator) {
-//        try {
-//            WebElement element = driver.findElement(By.xpath(locator));
-//            Actions action = new Actions(driver);
-//            Actions hover = action.moveToElement(element);
-//        } catch (Exception ex) {
-//            System.out.println("First attempt has been done, This is second try");
-//            WebElement element = driver.findElement(By.xpath(locator));
-//            Actions action = new Actions(driver);
-//            action.moveToElement(element).perform();
-//        }
-//    }
-
-
-public static void mouseHover(WebElement element) {
-            Actions actions = new Actions(driver);
-            actions.moveToElement(element).perform();
+        try {
+            WebElement element = driver.findElement(By.xpath(locator));
+            Actions action = new Actions(driver);
+            Actions hover = action.moveToElement(element);
+        } catch (Exception ex) {
+            System.out.println("First attempt has been done, This is second try");
+            WebElement element = driver.findElement(By.xpath(locator));
+            Actions action = new Actions(driver);
+            action.moveToElement(element).perform();
         }
+    }
 
 
+
+Code Example for expalantion 2 
+
+    public void clearInputBox(WebElement webElement) {
+        webElement.clear();
+    }
+    public void clearField(String locator) {
+        driver.findElement(By.id(locator)).clear();
+    }
+
+    public void clearInputField(String locator) {
+        driver.findElement(By.cssSelector(locator)).clear();
+    }
+
+
+
+Code eaxample for expalanation 1 
 
 public void typeOnElement(String locator, String value) {
         try {
@@ -127,6 +181,7 @@ public void typeOnElement(String locator, String value) {
             driver.findElement(By.xpath(locator)).sendKeys(value);
         }
     }
+
 
     public static void typeOnElementNEnter(String locator, String value) {
         try {
@@ -146,6 +201,8 @@ public void typeOnElement(String locator, String value) {
             }
         }
     }
+
+
 
     public static void typeOnElementNEnter(String locator, String value, WebDriver driver1) {
         try {
@@ -167,6 +224,11 @@ public void typeOnElement(String locator, String value) {
     }
 
 
+
+
+
+
+Example for to reduce the code Explanation 4 
 
     public static void windowSwitch() {
         for (String winHandle : driver.getWindowHandles()) {
