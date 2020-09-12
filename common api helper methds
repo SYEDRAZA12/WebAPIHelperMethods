@@ -8,6 +8,14 @@ Expalaination:  There are three basic reason we need to upgrade our WebAPI as de
 
 4)  we can achive desired function by less code 
 
+5) we have total 51 methods only 19 Methods are Unique rest 32 methods are are doing repation and perfore only 10 taskes.  
+
+
+<************************************************************************************>
+
+Example of Redundent Methods (32 Methods from Web API)
+
+
 
 
 
